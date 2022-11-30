@@ -53,7 +53,7 @@ import {
             </Typography>
             <UserBox>
               <Avatar
-                src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                src="https://res.cloudinary.com/dezhi6orz/image/upload/v1669388201/USER_PROFILE/IMG_20220626_170807_Bokeh_2_sx4pdn.jpg"
                 sx={{ width: 30, height: 30 }}
               />
               <Typography fontWeight={500} variant="span">

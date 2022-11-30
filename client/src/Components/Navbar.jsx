@@ -12,7 +12,7 @@ import {
   Typography,
   IconButton 
 } from "@mui/material";
-import {Link} from "react-router-dom";
+import {Link} from "@mui/material";
 import React, { useState } from "react";
 
 const StyledToolbar = styled(Toolbar)({
@@ -57,13 +57,13 @@ const Navbar = () => {
           <InputBase placeholder="search..." />
         </Search>
         <Icons>
-          <Link to='/'>
+          <Link href='/'>
         <IconButton sx={{color:'white'}}>
        
         < Home/>
       </IconButton>
       </Link>
-      <Link to ='/add'>
+      <Link href ='/add'>
       <IconButton sx={{color:'white'}}>
        
        < Create/>
@@ -77,16 +77,16 @@ const Navbar = () => {
           </Badge>
           <Avatar
             sx={{ width: 30, height: 30 }}
-            src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            src="https://res.cloudinary.com/dezhi6orz/image/upload/v1669388201/USER_PROFILE/IMG_20220626_170807_Bokeh_2_sx4pdn.jpg"
             onClick={(e) => setOpen(true)}
           />
         </Icons>
         <UserBox onClick={(e) => setOpen(true)}>
           <Avatar
             sx={{ width: 30, height: 30 }}
-            src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            src="https://res.cloudinary.com/dezhi6orz/image/upload/v1669388201/USER_PROFILE/IMG_20220626_170807_Bokeh_2_sx4pdn.jpg"
           />
-          <Typography variant="span">John</Typography>
+          <Typography variant="span">Roixy</Typography>
         </UserBox>
       </StyledToolbar>
       <Menu
@@ -103,11 +103,11 @@ const Navbar = () => {
           horizontal: "right",
         }}
       >
-        <Link to ='/profile'>
+        <Link href ='/profile' sx={{textDecoration:'none'}}>
         <MenuItem>Profile</MenuItem>
         </Link>
-        <Link to='/settings'>
-        <MenuItem sx={{textDecoration:'none'}}>Settings</MenuItem>
+        <Link href='/settings' sx={{textDecoration:'none'}}>
+        <MenuItem >Settings</MenuItem>
         </Link>
         <MenuItem>Logout</MenuItem>
       </Menu>

@@ -4,7 +4,7 @@ import Home from "./Pages/Home";
 import Navbar from "./Components/Navbar";
 import Login from './Pages/Login'
 import SignUp from "./Pages/Signup";
-
+import Profile from "./Pages/Profile";
 import Settings from "./Pages/Setting";
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
         </Route>
         
         <Route exact path="/settings" element={<Settings/>}/>
-        <Route exact path="/profile" />
+        <Route exact path="/profile" element={<Profile/>} />
        
        
       </Routes>
