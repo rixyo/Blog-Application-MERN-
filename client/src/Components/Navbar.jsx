@@ -12,6 +12,7 @@ import {
   Typography,
   IconButton 
 } from "@mui/material";
+import {Link} from "react-router-dom";
 import React, { useState } from "react";
 
 const StyledToolbar = styled(Toolbar)({
@@ -46,24 +47,28 @@ const UserBox = styled(Box)(({ theme }) => ({
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   return (
-    <AppBar position="sticky">
+    <AppBar position="sticky" sx={{backgroundColor:'black'}}>
       <StyledToolbar>
         <Typography variant="h6" sx={{ display: { xs: "none", sm: "block" } }}>
-          LAMA DEV
+          inkLing
         </Typography>
         <Pets sx={{ display: { xs: "block", sm: "none" } }} />
         <Search>
           <InputBase placeholder="search..." />
         </Search>
         <Icons>
+          <Link to='/'>
         <IconButton sx={{color:'white'}}>
        
         < Home/>
       </IconButton>
+      </Link>
+      <Link to ='/add'>
       <IconButton sx={{color:'white'}}>
        
        < Create/>
      </IconButton>
+     </Link>
           <Badge badgeContent={4} color="error">
             <Mail />
           </Badge>
@@ -98,8 +103,12 @@ const Navbar = () => {
           horizontal: "right",
         }}
       >
+        <Link to ='/profile'>
         <MenuItem>Profile</MenuItem>
-        <MenuItem>My account</MenuItem>
+        </Link>
+        <Link to='/settings'>
+        <MenuItem sx={{textDecoration:'none'}}>Settings</MenuItem>
+        </Link>
         <MenuItem>Logout</MenuItem>
       </Menu>
     </AppBar>

@@ -2,16 +2,20 @@ import { Link } from "react-router-dom";
 import "./Post.css";
 import {
     Avatar,
-    Card,
+   
     CardActions,
-    CardContent,
+  
     CardHeader,
     CardMedia,
-    Checkbox,
+
     IconButton,
-    Typography,
+  
   } from "@mui/material"
-  import { Favorite, FavoriteBorder, MoreVert, Share } from "@mui/icons-material";
+ 
+  import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShareIcon from '@mui/icons-material/Share';
+import CommentIcon from '@mui/icons-material/Comment';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 export default function Post() {
   return (
     <>
@@ -20,7 +24,11 @@ export default function Post() {
           avatar={<Avatar sx={{ bgcolor: "white" }} aria-label="recipe"
           src="https://res.cloudinary.com/dezhi6orz/image/upload/v1669388201/USER_PROFILE/IMG_20220626_170807_Bokeh_2_sx4pdn.jpg" />
               
-         }
+         } action={
+            <IconButton aria-label="settings">
+              <MoreVertIcon />
+            </IconButton>
+          }
         
           title="Roixy"
           subheader="September 14, 2022" />
@@ -59,6 +67,18 @@ Fast, unopinionated, minimalist web framework for Node.js
 
 
               </p>
+              <CardActions disableSpacing>
+        <IconButton aria-label="add to favorites">
+          <FavoriteIcon />
+        </IconButton>
+        <IconButton aria-label="add to favorites">
+          <CommentIcon />
+        </IconButton>
+        <IconButton aria-label="share">
+          <ShareIcon />
+        </IconButton>
+       
+      </CardActions>
           </div>
           </>
   );

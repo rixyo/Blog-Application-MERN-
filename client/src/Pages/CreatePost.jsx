@@ -2,12 +2,11 @@ import {
     Avatar,
     Button,
     ButtonGroup,
-    Fab,
-    Grid,
-    Modal,
+  
     Stack,
     styled,
     TextField,
+    IconButton,
  
     Typography,
   } from "@mui/material";
@@ -45,6 +44,8 @@ import {
             color={"text.primary"}
             p={3}
             borderRadius={5}
+        sx={{marginLeft:{xl:70,sm:15,md:40}}}
+           
         
           >
             <Typography variant="h6" color="gray" textAlign="center">
@@ -56,16 +57,24 @@ import {
                 sx={{ width: 30, height: 30 }}
               />
               <Typography fontWeight={500} variant="span">
-                John Doe
+                Roixy
               </Typography>
             </UserBox>
+            <TextField
+              sx={{ width: "100%" }}
+              id="standard-multiline-static"
+              multiline
+             
+              placeholder="#Tag"
+              variant="standard"
+            />
           
             <TextField
               sx={{ width: "100%" }}
               id="standard-multiline-static"
               multiline
               rows={0}
-              placeholder="What's on your mind?"
+              placeholder="Give a Title"
               variant="standard"
             />
            
@@ -79,24 +88,28 @@ import {
             />
            
             <Stack direction="row" gap={1} mt={2} mb={3}>
-              <EmojiEmotions color="primary" />
-              <Image color="secondary" />
-              <VideoCameraBack color="success" />
-              <PersonAdd color="error" />
+            <IconButton color="primary" aria-label="upload picture" component="label">
+        <input hidden accept="image/*" type="file" />
+        <VideoCameraBack />
+      </IconButton>
+              <IconButton color="primary" aria-label="upload picture" component="label">
+        <input hidden accept="image/*" type="file" />
+        <Image />
+      </IconButton>
+             
+            
             </Stack>
             <ButtonGroup
               fullWidth
               variant="contained"
               aria-label="outlined primary button group"
-                          display='flex'
-            flexDirection='column'
-            alignItems='center'
+                         
+           
+           
 
             >
               <Button>Post</Button>
-              <Button sx={{ width: "100px" }}>
-                <DateRange />
-              </Button>
+             
             </ButtonGroup>
           </Box>
          

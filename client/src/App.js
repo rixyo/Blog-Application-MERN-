@@ -1,7 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Add from "./Pages/CreatePost";
-import Home from "./Pages/Home/Home";
+import Home from "./Pages/Home";
 import Navbar from "./Components/Navbar";
+import Login from './Pages/Login'
+import SignUp from "./Pages/Signup";
+
+import Settings from "./Pages/Setting";
 function App() {
   return (
    <BrowserRouter>
@@ -12,17 +16,18 @@ function App() {
         <Route exact path="/add" element={<Add/>} />
          
       
-        <Route path="/register">
+        <Route exact path="/SignUp" element={<SignUp/>}/>
          
-        </Route>
-        <Route path="/login"></Route>
+        
+        <Route exact path="/login" element={<Login/>}/>
         <Route path="/post/:id">
      
         </Route>
-        <Route path="/write"></Route>
-        <Route path="/settings">
+        
+        <Route exact path="/settings" element={<Settings/>}/>
+        <Route exact path="/profile" />
        
-        </Route>
+       
       </Routes>
    </BrowserRouter>
   );
