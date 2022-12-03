@@ -5,7 +5,7 @@ const { StatusCodes }=require("http-status-codes")
 const getAllPosts=async(req,res)=>{
    
     const post=await Post.find({ })
-    .populate({path:'createdBy',select:['knickName','image']})
+    .populate({path:'createdBy',select:['username','image']})
     .sort('createdAt')
 
 
@@ -24,7 +24,7 @@ const getPost=async(req,res)=>{
       const post = await Post.findOne({
         _id: postId,
        
-      }).populate({path:'createdBy',select:['knickName','image']})
+      }).populate({path:'createdBy',select:['username','image']})
       if (!post) {
         throw new NotFoundError(`No job with id ${postId}`)
       }
@@ -76,5 +76,6 @@ const deletePost= async(req,res)=>{
   res.status(StatusCodes.OK).send("Post is Deleted successfully")
 
 }
+
 
 module.exports={getAllPosts,getPost,updatePost,deletePost,createPost}

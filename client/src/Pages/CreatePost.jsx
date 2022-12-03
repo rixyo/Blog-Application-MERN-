@@ -1,14 +1,10 @@
 import {
     Avatar,
     Button,
-    ButtonGroup,
-  
-    Stack,
+    ButtonGroup,Stack,
     styled,
     TextField,
-    IconButton,
- 
-    Typography,
+    IconButton,Typography,
   } from "@mui/material";
   import React, { useState,useContext } from "react";
   import {Image,VideoCameraBack} from "@mui/icons-material";
@@ -22,60 +18,76 @@ import {
     gap: "10px",
     marginBottom: "20px",
   });
+
   
   const CreatePost = () => {
-    const { account } = useContext(DataContext);
+
+   
     const navigate = useNavigate();
-    const [title,setTitle]=useState('')
-    const [tags,setTags]=useState('')
-    const [description,setDescription]=useState('')
+   const [tags,setTags]=useState('')
+
+   const [title,setTitle]=useState('')
+   const [description,setdescription]=useState('')
 
     const [image, setImage] = useState(null);
-       const [upladingImg, setUploadingImg] = useState(false);
-       const [imagePreview, setImagePreview] = useState(null);
-    const validateImg=(e)=>{ 
-      const file = e.target.files[0];
-      if (file.size >= 1048576) {
-          return alert("Max file size is 1mb");
-      } else {
-          setImage(file);
-          setImagePreview(URL.createObjectURL(file));
-      }
-    }
+    const [upladingImg, setUploadingImg] = useState(false);
+    const [imagePreview, setImagePreview] = useState(null);
+ const validateImg=(e)=>{ 
+   const file = e.target.files[0];
+   if (file.size >= 1048576) {
+       return alert("Max file size is 1mb");
+   } else {
+       setImage(file);
+       setImagePreview(URL.createObjectURL(file));
+   }
+ }
+ const uploadImage=async()=>{
+   const data = new FormData();
+   data.append("file", image);
+   data.append("upload_preset",process.env.REACT_APP_CLOUDINARY_KEY);
+   try {
+     setUploadingImg(true);
+     const Cloudinary_url=process.env.REACT_APP_CLOUDINARY_URL
+     let res = await fetch(Cloudinary_url, {
+         method: "post",
+         body: data,
+     });
+     const urlData = await res.json();
+     setUploadingImg(false);
+     return urlData.url;
+     
+   } catch (error) {
+     setUploadingImg(false);
+           console.log(error);
+     
+   }
+ }
 
-    const uploadImage=async()=>{
-      const data = new FormData();
-      data.append("file", image);
-      data.append("upload_preset",process.env.REACT_APP_CLOUDINARY_KEY);
-      try {
-        setUploadingImg(true);
-        const Cloudinary_url=process.env.REACT_APP_CLOUDINARY_URL
-        let res = await fetch(Cloudinary_url, {
-            method: "post",
-            body: data,
-        });
-        const urlData = await res.json();
-        setUploadingImg(false);
-        return urlData.url;
-        
-      } catch (error) {
-        setUploadingImg(false);
-              console.log(error);
-        
-      }
-    }
+   
+
+ const { user } = useContext(DataContext);
+
     const handlePost=async(e)=>{
       e.preventDefault();
-      if (!image) return alert("Please upload your profile picture");
-        const url = await uploadImage(image);
-        console.log(url)
-         await API.createPost({title,description,tags,image:url})
+  
+      if (!Image) return alert("Please upload your profile picture");
+      const url = await uploadImage(Image);
+      const newPost={
+        title,
+        tags,
+        description,
+        image:url,
+        username: user,
+      
         
-          navigate('/')
-          
-        
-
-    }
+      }
+      
+      
+      await API.createPost(newPost)
+      navigate('/')
+     
+      }
+    
  
     return (
      
@@ -100,11 +112,11 @@ import {
             </Typography>
             <UserBox>
               <Avatar
-                src="https://res.cloudinary.com/dezhi6orz/image/upload/v1669388201/USER_PROFILE/IMG_20220626_170807_Bokeh_2_sx4pdn.jpg"
+                src=''
                 sx={{ width: 30, height: 30 }}
               />
               <Typography fontWeight={500} variant="span">
-                Roixy
+               
               </Typography>
             </UserBox>
             <TextField
@@ -114,7 +126,7 @@ import {
              
               placeholder="#Tag"
               variant="standard"
-              onChange={(e)=>setTags(e.target.value)} value={tags}
+              onChange={e=>setTags(e.target.value)}
             />
           
             <TextField
@@ -124,7 +136,7 @@ import {
               rows={0}
               placeholder="Give a Title"
               variant="standard"
-              onChange={(e)=>setTitle(e.target.value)} value={title}
+              onChange={e=>setTitle(e.target.value)}
             />
            
                <TextField
@@ -134,7 +146,7 @@ import {
               rows={3}
               placeholder="What's on your mind?"
               variant="standard"
-              onChange={(e)=>setDescription(e.target.value)} value={description}
+              onChange={e=>setdescription(e.target.value)}
             />
            
             <Stack direction="row" gap={1} mt={2} mb={3}>
@@ -158,7 +170,7 @@ import {
            
 
             >
-              <Button type="submit" >{upladingImg}
+              <Button type="submit">{upladingImg}
               Post</Button>
              
             </ButtonGroup>

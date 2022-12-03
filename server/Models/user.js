@@ -2,11 +2,12 @@ const mongoose=require('mongoose')
 const jwt =require("jsonwebtoken")
 const bcrypt = require('bcryptjs')
 const UserSchema=new mongoose.Schema({
-    knickName:{
+    username:{
         type: String,
         required:[true,'Please provide name'],
         minlength:3,
         maxlength:50,
+        unique:true
         
 
     },

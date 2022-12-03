@@ -12,7 +12,7 @@ const register=async(req,res)=>{
     const user=await User.create({...req.body,tag:uniqid.time()})
     const token=user.createJwt()
     
-    res.status(StatusCodes.CREATED).json({ name: user.knickName,image:user.image,tag:user.tag,github:user.github,token})
+    res.status(StatusCodes.CREATED).json({ username: user.username,image:user.image,tag:user.tag,github:user.github,token})
 }
 const login=async(req,res)=>{
    const{email,password}=req.body
@@ -32,8 +32,11 @@ const login=async(req,res)=>{
 
   }
   const token=user.createJwt()
-  res.status(StatusCodes.OK).json( { email:user.email, name:user.knickName,token})
+  res.status(StatusCodes.OK).json({ username: user.username,token})
 }
+
+
+
 
 
 module.exports={register,login}

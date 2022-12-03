@@ -10,10 +10,12 @@ import {
   styled,
   Toolbar,
   Typography,
-  IconButton 
+  IconButton, 
+  Button
 } from "@mui/material";
 import {Link} from "@mui/material";
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 
 const StyledToolbar = styled(Toolbar)({
@@ -46,8 +48,18 @@ const UserBox = styled(Box)(({ theme }) => ({
   },
 }));
 const Navbar = () => {
- 
+ const navigate=useNavigate()
   const [open, setOpen] = useState(false);
+  const logout = () => {
+ 
+  
+
+    // CLEAR DATA FROM STORAGE
+    localStorage.clear();
+    sessionStorage.clear();
+
+    navigate("/login");
+}
   return (
     <AppBar position="sticky" sx={{backgroundColor:'black'}}>
       <StyledToolbar>
@@ -79,16 +91,16 @@ const Navbar = () => {
           </Badge>
           <Avatar
             sx={{ width: 30, height: 30 }}
-            src="https://res.cloudinary.com/dezhi6orz/image/upload/v1669388201/USER_PROFILE/IMG_20220626_170807_Bokeh_2_sx4pdn.jpg"
+          
             onClick={(e) => setOpen(true)}
           />
         </Icons>
         <UserBox onClick={(e) => setOpen(true)}>
           <Avatar
             sx={{ width: 30, height: 30 }}
-            src="https://res.cloudinary.com/dezhi6orz/image/upload/v1669388201/USER_PROFILE/IMG_20220626_170807_Bokeh_2_sx4pdn.jpg"
+            
           />
-          <Typography variant="span">Roixy</Typography>
+        
         </UserBox>
       </StyledToolbar>
       <Menu
@@ -111,7 +123,9 @@ const Navbar = () => {
         <Link href='/settings' sx={{textDecoration:'none'}}>
         <MenuItem >Settings</MenuItem>
         </Link>
-        <MenuItem>Logout</MenuItem>
+        <MenuItem><Button variant="outlined" color="error"  onClick={()=> logout()}>
+          Logout
+          </Button></MenuItem>
       </Menu>
     </AppBar>
   );

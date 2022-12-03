@@ -17,7 +17,9 @@ import ShareIcon from '@mui/icons-material/Share';
 import CommentIcon from '@mui/icons-material/Comment';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 export default function Post({ post }) {
-  console.log(post)
+
+
+
   const addEllipsis = (str, limit) => {
     return str.length > limit ? str.substring(0, limit) + '...' : str;
 } 
@@ -35,7 +37,7 @@ export default function Post({ post }) {
             </IconButton>
           }
         
-          title={post.createdBy.knickName}
+          title={post.createdBy.username}
           subheader={post.createdAt} />
           <CardMedia className="postImg"
         component="img"
@@ -44,6 +46,7 @@ export default function Post({ post }) {
         alt="Paella dish"
          
       />
+    
               <div className="postInfo">
                   <div className="postCats">
                       <span className="postCat">

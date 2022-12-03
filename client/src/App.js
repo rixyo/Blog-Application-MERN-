@@ -5,11 +5,12 @@ import Home from "./Pages/Home";
 import Navbar from "./Components/Navbar";
 import Login from './Pages/Login'
 import SignUp from "./Pages/Signup";
-import Profile from "./Pages/Profile";
+
 import Settings from "./Pages/Setting";
 import DataProvider from "./context/DataProvider";
 import DetailView from './Components/PostDetail';
 import UpdatePost from './Components/Update';
+import Profile from './Pages/Profile';
 const PrivateRoute = ({ isAuthenticated, ...props }) => {
   const Token = sessionStorage.getItem('Token');
   if(Token){
@@ -45,14 +46,15 @@ function App() {
             <Route path='/update/:id' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
               <Route path='/update/:id' element={<UpdatePost />} />
             </Route>
+            <Route path='/profile' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
+            <Route path='/profile' element={<Profile />} />
+            </Route>
 
 
           
 
 
-          <Route path='/profile' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
-            <Route path='/profile' element={<Profile/>} />
-          </Route>
+        
 
           <Route path='/settings' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
             <Route path='/settings' element={<Settings />} />

@@ -24,7 +24,8 @@ const theme = createTheme();
        
 
         sessionStorage.setItem('Token', `Bearer ${response.data.token}`);
-        setAccount({ name: response.data.name, email: response.data.email });
+        localStorage.setItem("userInfo", JSON.stringify(response.data.username));
+     
         
         isUserAuthenticated(true)
        

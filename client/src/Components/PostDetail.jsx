@@ -25,6 +25,7 @@ const Item = styled(Paper)(({ theme }) => ({
   }));
 
 const DetailView = () => {
+ 
     const Image = styled('img')({
         width: '50%',
         height: '50vh',
@@ -33,12 +34,12 @@ const DetailView = () => {
     const url = 'https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80';
     
     const [post, setPost] = useState({});
-    const [user, setUser] = useState({});
-    const { account } = useContext(DataContext);
+    const [Usr, setUser] = useState({});
+  
 
     const navigate = useNavigate();
     const { id } = useParams();
-    
+    const { user } = useContext(DataContext);
     useEffect(() => {
         const fetchData = async () => {
             let response = await API.getPostById(id);
@@ -46,13 +47,17 @@ const DetailView = () => {
                 setPost(response.data);
                 setUser(response.data.createdBy)
                
+               
             }
         }
         fetchData();
     }, []);
 
     const deletePost = async () => {  
-       await API.deletePost(post._id)
+       await API.deletePost(post._id
+       
+       
+        )
         navigate('/')
     }
 
@@ -62,13 +67,13 @@ const DetailView = () => {
     
     <CardHeader sx={{marginLeft:{xl:70,sm:15,md:40}}}
           avatar={<Avatar sx={{ bgcolor: "white" }} aria-label="recipe"
-          src= {user.image} />
+          src= {Usr.image} />
               
          }
           
           
         
-          title={user.knickName}
+          title={Usr.username}
           subheader={post.createdAt} />
           <Box sx={{marginLeft:{xl:70,sm:15,md:40}}}>
           <Image src={post.image || url} alt="post"  />
@@ -76,20 +81,25 @@ const DetailView = () => {
           <Stack direction="row" spacing={2} justifyContent='flex-end' >
           
   <Item>
+  {post.username === user && (
   <Link href={`/update/${post._id}`}>
    
     <IconButton variant="outlined" color="success">
         <Edit/>
     </IconButton>
     </Link>
-    
+  )}
     </Item>
     
     <Item>
+    {post.username ===user && (
+        
     <Button variant="outlined" color="error" onClick={()=>deletePost()}>
        
         <Delete/>
     </Button>
+    )}
+        
     </Item>
  
   

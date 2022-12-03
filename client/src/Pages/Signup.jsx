@@ -11,7 +11,7 @@ const theme = createTheme();
 export default function SignUp () {
   const navigate = useNavigate();
   const [email,setEmail]=useState('')
-  const [knickName,setKnickName]=useState('')
+  const [username,setUsername]=useState('')
   const[password,setPassword]=useState('')
   const [githubUrl,setGithuUrl]=useState('')
   const [error,setError]=useState('')
@@ -55,7 +55,7 @@ export default function SignUp () {
     if (!image) return alert("Please upload your profile picture");
         const url = await uploadImage(image);
         console.log(url)
-       let response = await API.userSignup({email,knickName,githubUrl,image:url,password})
+         await API.userSignup({email,username,githubUrl,image:url,password})
       
         
         navigate('/login')
@@ -121,12 +121,12 @@ export default function SignUp () {
                 required
                 fullWidth
               
-                label="Knick Name"
+                label="user name"
                
                 
                 autoFocus
-                onChange={(e)=>setKnickName(e.target.value)}
-                value={knickName}
+                onChange={(e)=>setUsername(e.target.value)}
+                value={username}
               />
               <TextField
                 margin="normal"

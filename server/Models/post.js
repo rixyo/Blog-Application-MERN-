@@ -13,6 +13,10 @@ const postSchema=mongoose.Schema({
         type: String,
     },
     tags: [String],
+    username: {
+        type: String,
+        required: true
+    },
     
     likeCount:{
         type: Number,
