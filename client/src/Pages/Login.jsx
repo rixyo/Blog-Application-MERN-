@@ -1,16 +1,37 @@
-import  React from 'react';
-
+import  React,{useState,useContext} from 'react';
+import { DataContext } from '../context/DataProvider';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-
+import {useNavigate}from 'react-router-dom'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Typography,Grid,Box,Paper,TextField,CssBaseline,Link,Button,Avatar,FormControlLabel,Checkbox } from '@mui/material';
 
-
+import {API} from '../api/api'
 const theme = createTheme();
 
-export default function Login() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
+ 
+  export default function Login({ isUserAuthenticated }) {
+  const navigate=useNavigate()
+  const {setAccount}=useContext(DataContext)
+  const [email,setEmail]=useState('')
+  const [password,setPassword]=useState('')
+  const [erros,showError]=useState('')
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let response= await API.userLogin({email,password})
+   
+     
+      if (response.isSuccess) {
+       
+
+        sessionStorage.setItem('Token', `Bearer ${response.data.token}`);
+        setAccount({ name: response.data.name, email: response.data.email });
+        
+        isUserAuthenticated(true)
+       
+        navigate('/');
+    } else {
+        showError('Something went wrong! please try again later');
+    }
  
   };
 
@@ -48,16 +69,18 @@ export default function Login() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
+            <>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="email"
+              
                 label="Email Address"
                 name="email"
                 autoComplete="email"
                 autoFocus
+                onChange={(e)=>setEmail(e.target.value)} value={email}
               />
               
               <TextField
@@ -67,8 +90,9 @@ export default function Login() {
                 name="password"
                 label="Password"
                 type="password"
-                id="password"
+              
                 autoComplete="current-password"
+                onChange={(e)=>setPassword(e.target.value)} value={password}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -89,13 +113,14 @@ export default function Login() {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="/SignUP" variant="body2">
+                  <Link href="/singup" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
               </Grid>
               
             </Box>
+            </>
           </Box>
         </Grid>
       </Grid>

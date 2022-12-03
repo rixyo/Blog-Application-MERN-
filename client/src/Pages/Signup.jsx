@@ -1,16 +1,65 @@
-import  React from 'react';
+import  React,{useState} from 'react';
 
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { IconButton,Typography,Grid,Box,Paper,TextField,CssBaseline,Link,Button,Avatar } from '@mui/material';
-
-
+import {useNavigate} from'react-router-dom'
+import {API} from '../api/api'
 const theme = createTheme();
 
 export default function SignUp () {
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const navigate = useNavigate();
+  const [email,setEmail]=useState('')
+  const [knickName,setKnickName]=useState('')
+  const[password,setPassword]=useState('')
+  const [githubUrl,setGithuUrl]=useState('')
+  const [error,setError]=useState('')
+       //image upload states
+       const [image, setImage] = useState(null);
+       const [upladingImg, setUploadingImg] = useState(false);
+       const [imagePreview, setImagePreview] = useState(null);
+    const validateImg=(e)=>{ 
+      const file = e.target.files[0];
+      if (file.size >= 1048576) {
+          return alert("Max file size is 1mb");
+      } else {
+          setImage(file);
+          setImagePreview(URL.createObjectURL(file));
+      }
+    }
+
+    const uploadImage=async()=>{
+      const data = new FormData();
+      data.append("file", image);
+      data.append("upload_preset",process.env.REACT_APP_CLOUDINARY_KEY);
+      try {
+        setUploadingImg(true);
+        const Cloudinary_url=process.env.REACT_APP_CLOUDINARY_URL
+        let res = await fetch(Cloudinary_url, {
+            method: "post",
+            body: data,
+        });
+        const urlData = await res.json();
+        setUploadingImg(false);
+        return urlData.url;
+        
+      } catch (error) {
+        setUploadingImg(false);
+              console.log(error);
+        
+      }
+    }
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    if (!image) return alert("Please upload your profile picture");
+        const url = await uploadImage(image);
+        console.log(url)
+       let response = await API.userSignup({email,knickName,githubUrl,image:url,password})
+      
+        
+        navigate('/login')
+       
     
   };
 
@@ -49,59 +98,71 @@ export default function SignUp () {
               Sign Up
             </Typography>
             <IconButton color="primary" aria-label="upload picture" component="label">
-        <input hidden accept="image/*" type="file" />
+        <input hidden accept="image/png, image/jpeg" type="file" onChange={validateImg}  />
         < AddPhotoAlternateIcon/>
       </IconButton>
+      <>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+           
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="email"
+               
                 label="Email Address"
-                name="email"
+               
                 autoComplete="email"
                 autoFocus
+                onChange={(e)=>setEmail(e.target.value)}
+                value={email}
               />
                     <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="userName"
+              
                 label="Knick Name"
-                name="userName"
-                autoComplete="email"
+               
+                
                 autoFocus
+                onChange={(e)=>setKnickName(e.target.value)}
+                value={knickName}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                name="password"
+               
                 label="Password"
                 type="password"
-                id="password"
+            
                 autoComplete="current-password"
+                onChange={(e)=>setPassword(e.target.value)} value={password}
               />
                     <TextField
                 margin="normal"
                 
                 fullWidth
                 type='url'
-                id="url"
+              
                 label="GitHub Url"
-                name="url"
+            
             
                 autoFocus
+                onChange={(e)=>setGithuUrl(e.target.value)} value={githubUrl}
               />
-              
+              {error&&<Typography>{error}</Typography>}
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
+                {upladingImg}
                 Sign Up
+                
+             
+              
               </Button>
               <Grid container>
                 <Grid item xs>
@@ -113,8 +174,9 @@ export default function SignUp () {
                   </Link>
                 </Grid>
               </Grid>
-              
+           
             </Box>
+            </>
           </Box>
         </Grid>
       </Grid>

@@ -18,6 +18,14 @@ const postSchema=mongoose.Schema({
         type: Number,
         default: 0,
     },
+    createdBy: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
+        required: [true, 'Please provide user'],
+      },
+      createdDate: {
+        type: Date
+    }
    
 
 }, { timestamps: true })

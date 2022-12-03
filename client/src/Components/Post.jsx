@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@mui/material";
 import "./Post.css";
 import {
     Avatar,
@@ -16,13 +16,18 @@ import {
 import ShareIcon from '@mui/icons-material/Share';
 import CommentIcon from '@mui/icons-material/Comment';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-export default function Post() {
+export default function Post({ post }) {
+  console.log(post)
+  const addEllipsis = (str, limit) => {
+    return str.length > limit ? str.substring(0, limit) + '...' : str;
+} 
+  
   return (
     <>
     <div className="post">
     <CardHeader
           avatar={<Avatar sx={{ bgcolor: "white" }} aria-label="recipe"
-          src="https://res.cloudinary.com/dezhi6orz/image/upload/v1669388201/USER_PROFILE/IMG_20220626_170807_Bokeh_2_sx4pdn.jpg" />
+          src= {post.createdBy.image} />
               
          } action={
             <IconButton aria-label="settings">
@@ -30,40 +35,38 @@ export default function Post() {
             </IconButton>
           }
         
-          title="Roixy"
-          subheader="September 14, 2022" />
+          title={post.createdBy.knickName}
+          subheader={post.createdAt} />
           <CardMedia className="postImg"
         component="img"
 
-        image="https://www.bleepstatic.com/content/hl-images/2020/08/04/nodejs-header.jpg"
+        image={post.image}
         alt="Paella dish"
          
       />
               <div className="postInfo">
                   <div className="postCats">
                       <span className="postCat">
-                          <Link className="link" to="/posts?cat=Music">
-                              #Node
-                          </Link>
+                          
+                             {post.tags}
+                          
                       </span>
-                      <span className="postCat">
-                          <Link className="link" to="/posts?cat=Music">
-                              #Express
-                          </Link>
-                      </span>
+                      
                   </div>
+                  <Link sx={{textDecoration:'none',color:'black'}} href={`details/${post._id}`}>
                   <span className="postTitle">
-                      <Link to="/post/abc" className="link">
-                    
-Fast, unopinionated, minimalist web framework for Node.js
-                      </Link>
+                      
+                      {addEllipsis(post.title, 100)}
+
+                     
                   </span>
+                  </Link>
                   <hr />
                  
                   
               </div>
               <p className="postDesc">
-              Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
+              {addEllipsis(post.description, 100)}
 
 
               </p>

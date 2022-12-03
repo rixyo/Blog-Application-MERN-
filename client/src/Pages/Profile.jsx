@@ -4,10 +4,11 @@ import CardContent from '@mui/material/CardContent';
 
 import Typography from '@mui/material/Typography';
 import { Avatar, Button, CardActionArea, Grid } from '@mui/material';
-import Post from '../Components/Posts/Post';
+import Post from '../Components/Post';
 import { Link } from '@mui/material';
 export default function Profile() {
   return (
+    <>
     <Grid sx={{ maxWidth: 345,marginLeft:{xl:70,sm:15,md:40}}}>
     <Card >
       <CardActionArea>
@@ -18,6 +19,11 @@ export default function Profile() {
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             Roixy
+            
+          </Typography>
+          <Typography gutterBottom variant="p" component="div">
+            @tag
+            
           </Typography>
           <Typography variant="body2" color="text.secondary">
           A passionated Server side Learner
@@ -34,6 +40,7 @@ export default function Profile() {
     <Post/>
     
     </Grid>
+    </>
    
   );
 }

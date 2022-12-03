@@ -15,6 +15,7 @@ import {
 import {Link} from "@mui/material";
 import React, { useState } from "react";
 
+
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
   justifyContent: "space-between",
@@ -45,6 +46,7 @@ const UserBox = styled(Box)(({ theme }) => ({
   },
 }));
 const Navbar = () => {
+ 
   const [open, setOpen] = useState(false);
   return (
     <AppBar position="sticky" sx={{backgroundColor:'black'}}>
@@ -63,7 +65,7 @@ const Navbar = () => {
         < Home/>
       </IconButton>
       </Link>
-      <Link href ='/add'>
+      <Link href ='/create'>
       <IconButton sx={{color:'white'}}>
        
        < Create/>

@@ -1,6 +1,6 @@
 import { Box, Stack, Skeleton } from "@mui/material";
 import React, { useState } from "react";
-import Posts from '../Components/Posts/posts'
+import Posts from '../Components/Posts'
 
 const Home = () => {
     const [loading, setLoading] = useState(true);
@@ -20,7 +20,7 @@ const Home = () => {
           </Stack>
         ) : (
           <>
-            <Posts />
+          <Posts/>
             
            
           </>
