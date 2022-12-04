@@ -13,10 +13,7 @@ const postSchema=mongoose.Schema({
         type: String,
     },
     tags: [String],
-    username: {
-        type: String,
-        required: true
-    },
+   
     
     likeCount:{
         type: Number,
@@ -27,11 +24,10 @@ const postSchema=mongoose.Schema({
         ref: 'User',
         required: [true, 'Please provide user'],
       },
-      createdDate: {
-        type: Date
+     
     }
    
 
-}, { timestamps: true })
+, { timestamps: true })
 
 module.exports=mongoose.model('Post',postSchema)

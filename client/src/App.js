@@ -1,21 +1,30 @@
-import {useState}from 'react'
+import {useState,useEffect}from 'react'
 import { BrowserRouter, Routes, Route,Outlet,Navigate } from "react-router-dom";
 import CreatePost from './Pages/CreatePost';
 import Home from "./Pages/Home";
 import Navbar from "./Components/Navbar";
 import Login from './Pages/Login'
 import SignUp from "./Pages/Signup";
-
+import  secureLocalStorage  from  "react-secure-storage";
 import Settings from "./Pages/Setting";
 import DataProvider from "./context/DataProvider";
 import DetailView from './Components/PostDetail';
 import UpdatePost from './Components/Update';
-import Profile from './Pages/Profile';
+
+
+
 const PrivateRoute = ({ isAuthenticated, ...props }) => {
-  const Token = sessionStorage.getItem('Token');
+
+  
+  const Token = secureLocalStorage.getItem("Token");
+ 
+ 
+ 
   if(Token){
     isAuthenticated=true
-  }
+
+  } 
+
   return Token && isAuthenticated ? 
     <>
       <Navbar />
@@ -24,7 +33,9 @@ const PrivateRoute = ({ isAuthenticated, ...props }) => {
 };
 
 function App() {
+ 
   const [isAuthenticated,isUserAuthenticated] = useState(false);
+ 
   return (
     <DataProvider>
     <BrowserRouter>
@@ -46,9 +57,8 @@ function App() {
             <Route path='/update/:id' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
               <Route path='/update/:id' element={<UpdatePost />} />
             </Route>
-            <Route path='/profile' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
-            <Route path='/profile' element={<Profile />} />
-            </Route>
+            
+            
 
 
           

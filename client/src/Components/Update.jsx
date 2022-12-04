@@ -48,7 +48,7 @@ import {
             if (response.isSuccess) {
                 setPost(response.data);
                 setUser(response.data.createdBy)
-                console.log(response.data.createdBy)
+                
             }
         }
         fetchData();

@@ -32,11 +32,36 @@ const login=async(req,res)=>{
 
   }
   const token=user.createJwt()
-  res.status(StatusCodes.OK).json({ username: user.username,token})
+  res.status(StatusCodes.OK).json({ id: user._id,token})
+}
+
+const profile = async (req, res) => {
+
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    user.username = req.body.username || user.username;
+  
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+
+    const updatedUser = await user.save();
+
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.username,
+      
+    
+      
+      
+    });
+  } else {
+    res.status(404);
+    throw new Error("User Not Found");
+  }
 }
 
 
 
-
-
-module.exports={register,login}
+module.exports={register,login,profile}

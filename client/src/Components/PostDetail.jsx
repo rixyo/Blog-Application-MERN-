@@ -81,7 +81,7 @@ const DetailView = () => {
           <Stack direction="row" spacing={2} justifyContent='flex-end' >
           
   <Item>
-  {post.username === user && (
+  {Usr._id===user &&(
   <Link href={`/update/${post._id}`}>
    
     <IconButton variant="outlined" color="success">
@@ -92,7 +92,7 @@ const DetailView = () => {
     </Item>
     
     <Item>
-    {post.username ===user && (
+    { Usr._id===user  &&  (
         
     <Button variant="outlined" color="error" onClick={()=>deletePost()}>
        
@@ -124,7 +124,7 @@ const DetailView = () => {
                  
                   
               </div>
-              <Typography>
+              <Typography variant="body1" gutterBottom={true}>
               {post.description}
 
               </Typography>

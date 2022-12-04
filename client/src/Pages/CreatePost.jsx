@@ -11,7 +11,7 @@ import {
   import { Box } from "@mui/system";
   import {API} from "../api/api"
   import {useNavigate}from 'react-router-dom'
-  import { DataContext } from '../context/DataProvider';
+ 
   const UserBox = styled(Box)({
     display: "flex",
     alignItems: "center",
@@ -65,7 +65,7 @@ import {
 
    
 
- const { user } = useContext(DataContext);
+
 
     const handlePost=async(e)=>{
       e.preventDefault();
@@ -77,7 +77,7 @@ import {
         tags,
         description,
         image:url,
-        username: user,
+        
       
         
       }
@@ -122,10 +122,12 @@ import {
             <TextField
               sx={{ width: "100%" }}
               id="standard-multiline-static"
+              required
               multiline
              
               placeholder="#Tag"
               variant="standard"
+             
               onChange={e=>setTags(e.target.value)}
             />
           
@@ -134,6 +136,7 @@ import {
               id="standard-multiline-static"
               multiline
               rows={0}
+              required
               placeholder="Give a Title"
               variant="standard"
               onChange={e=>setTitle(e.target.value)}
@@ -146,6 +149,7 @@ import {
               rows={3}
               placeholder="What's on your mind?"
               variant="standard"
+              required
               onChange={e=>setdescription(e.target.value)}
             />
            

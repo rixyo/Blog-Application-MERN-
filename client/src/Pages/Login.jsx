@@ -1,17 +1,17 @@
-import  React,{useState,useContext} from 'react';
-import { DataContext } from '../context/DataProvider';
+import  React,{useState,useEffect} from 'react';
+
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {useNavigate}from 'react-router-dom'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Typography,Grid,Box,Paper,TextField,CssBaseline,Link,Button,Avatar,FormControlLabel,Checkbox } from '@mui/material';
-
+import  secureLocalStorage  from  "react-secure-storage";
 import {API} from '../api/api'
 const theme = createTheme();
 
  
   export default function Login({ isUserAuthenticated }) {
   const navigate=useNavigate()
-  const {setAccount}=useContext(DataContext)
+
   const [email,setEmail]=useState('')
   const [password,setPassword]=useState('')
   const [erros,showError]=useState('')
@@ -21,12 +21,10 @@ const theme = createTheme();
    
      
       if (response.isSuccess) {
-       
-
-        sessionStorage.setItem('Token', `Bearer ${response.data.token}`);
-        localStorage.setItem("userInfo", JSON.stringify(response.data.username));
-     
         
+         
+          secureLocalStorage.setItem("Token", `Bearer ${response.data.token}`);
+          secureLocalStorage.setItem("userInfo", JSON.stringify(response.data.id));
         isUserAuthenticated(true)
        
         navigate('/');
