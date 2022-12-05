@@ -11,12 +11,12 @@ import DataProvider from "./context/DataProvider";
 import DetailView from './Components/PostDetail';
 import UpdatePost from './Components/Update';
 
-
+import Profile from './Pages/Profile';
 
 const PrivateRoute = ({ isAuthenticated, ...props }) => {
 
   
-  const Token = secureLocalStorage.getItem("Token");
+  const Token = secureLocalStorage.getItem("9z$C&F)J");
  
  
  
@@ -56,6 +56,9 @@ function App() {
             </Route>
             <Route path='/update/:id' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
               <Route path='/update/:id' element={<UpdatePost />} />
+            </Route>
+            <Route path='/profile' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
+              <Route path='/profile' element={<Profile />} />
             </Route>
             
             

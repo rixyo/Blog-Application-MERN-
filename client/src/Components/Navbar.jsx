@@ -14,10 +14,11 @@ import {
   Button
 } from "@mui/material";
 import {Link} from "@mui/material";
-import React, { useState, useContext } from "react";
-import { useNavigate } from 'react-router-dom';
+import React, { useState} from "react";
+import { useNavigate} from 'react-router-dom';
 import  secureLocalStorage  from  "react-secure-storage";
-import { DataContext } from '../context/DataProvider';
+
+
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
   justifyContent: "space-between",
@@ -49,9 +50,14 @@ const UserBox = styled(Box)(({ theme }) => ({
 }));
 const Navbar = () => {
 
-  
+
+
+
  const navigate=useNavigate()
   const [open, setOpen] = useState(false);
+   
+
+  
   const logout = () => {
  
   
@@ -94,7 +100,7 @@ const Navbar = () => {
             sx={{ width: 30, height: 30 }}
           
             onClick={(e) => setOpen(true)}
-            src=''
+        
           />
         </Icons>
         <UserBox onClick={(e) => setOpen(true)}>

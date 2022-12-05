@@ -1,14 +1,14 @@
 
-
+const protected=require("../middlewares/auth")
+const {login,register,profile}=require("../Controllers/auth")
 const express=require("express")
 const router=express.Router()
 
-const {login,register,profile}=require("../Controllers/auth")
 
 
 router.post('/register',register)
 router.post('/login',login)
-router.get('/profile',profile)
+router.route('/profile').get(protected,profile)
 
 
 module.exports=router

@@ -76,6 +76,18 @@ const deletePost= async(req,res)=>{
   res.status(StatusCodes.OK).send("Post is Deleted successfully")
 
 }
+const likePost = async (req, res) => {
+  const { id } = req.params;
+
+  
+  
+  const post = await Post.findById(id);
+
+  const updatedPost = await Post.findByIdAndUpdate(id, { likeCount: post.likeCount + 1 }, { new: true });
+  
+  res.status(StatusCodes.OK).json(updatedPost);
+}
 
 
-module.exports={getAllPosts,getPost,updatePost,deletePost,createPost}
+
+module.exports={getAllPosts,getPost,updatePost,deletePost,createPost,likePost}

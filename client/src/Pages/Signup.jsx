@@ -13,7 +13,8 @@ export default function SignUp () {
   const [email,setEmail]=useState('')
   const [username,setUsername]=useState('')
   const[password,setPassword]=useState('')
-  const [githubUrl,setGithuUrl]=useState('')
+  const [github,setGithub]=useState('')
+  const [bio,setBio]=useState('')
   const [error,setError]=useState('')
        //image upload states
        const [image, setImage] = useState(null);
@@ -55,7 +56,16 @@ export default function SignUp () {
     if (!image) return alert("Please upload your profile picture");
         const url = await uploadImage(image);
         console.log(url)
-         await API.userSignup({email,username,githubUrl,image:url,password})
+        const newUser={
+          bio,
+          email,
+           username,
+          github,
+         image:url,
+         password,
+        }
+        console.log(bio)
+         await API.userSignup(newUser)
       
         
         navigate('/login')
@@ -139,6 +149,19 @@ export default function SignUp () {
                 autoComplete="current-password"
                 onChange={(e)=>setPassword(e.target.value)} value={password}
               />
+                        <TextField
+                margin="normal"
+                required
+                fullWidth
+              
+                label="Bio"
+                
+               
+                
+                autoFocus
+                onChange={(e)=>setBio(e.target.value)}
+                value={bio}
+              />
                     <TextField
                 margin="normal"
                 
@@ -149,7 +172,7 @@ export default function SignUp () {
             
             
                 autoFocus
-                onChange={(e)=>setGithuUrl(e.target.value)} value={githubUrl}
+                onChange={(e)=>setGithub(e.target.value)} value={github}
               />
               {error&&<Typography>{error}</Typography>}
               <Button

@@ -99,11 +99,11 @@ import {
         </Typography>
         <UserBox>
           <Avatar
-            src={user.image}
+            src=''
             sx={{ width: 30, height: 30 }}
           />
           <Typography fontWeight={500} variant="span">
-            {user.knickName}
+            
           </Typography>
         </UserBox>
         <Box marginTop={0}>

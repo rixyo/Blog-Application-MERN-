@@ -8,7 +8,7 @@ const DataProvider = ({ children }) => {
     const [user, setUser] = useState();
 
     useEffect(() => {
-        const userInfo = JSON.parse(secureLocalStorage.getItem("userInfo"));
+        const userInfo = JSON.parse(secureLocalStorage.getItem("cRfUjXn2"));
         setUser(userInfo);
     
        

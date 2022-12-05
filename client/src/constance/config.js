@@ -28,15 +28,19 @@ export const SERVICE_URLS = {
     userLogin: { url: '/auth/login', method: 'POST' },
     userSignup: { url: '/auth/register', method: 'POST' },
     getAllPosts: { url: '/posts', method: 'GET', params: true },
-    userProfile: { url: '/user/profile', method: 'GET', params: true },
+    Profile:{url:'/auth/profile',method: 'GET',params: true},
 
   
     createPost: { url: '/posts', method: 'POST' },
     deletePost: { url: '/posts', method: 'DELETE', query: true },
     updatePost:{url:'/posts',method: 'PATCH',query: true},
+    likePost:{url:'/posts/like',method: 'PATCH'},
     getPostById: { url: '/posts', method: 'GET', query: true },
-    newComment: { url: '/comment/new', method: 'POST' },
-    getAllComments: { url: 'comments', method: 'GET', query: true },
-    deleteComment: { url: 'comment/delete', method: 'DELETE', query: true },
+    newComment: { url: '/comments', method: 'POST' },
+    getAllComments: { url: '/comments', method: 'GET', query: true },
+    deleteComment: { url: '/comments', method: 'DELETE', query: true },
+    newReplay: { url: '/replays', method: 'POST' },
+    getAllReplays: { url: '/replays', method: 'GET', query: true },
+    deleteReplay: { url: '/replays', method: 'DELETE', query: true },
     
 }

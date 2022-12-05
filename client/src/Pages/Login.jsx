@@ -5,12 +5,15 @@ import {useNavigate}from 'react-router-dom'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Typography,Grid,Box,Paper,TextField,CssBaseline,Link,Button,Avatar,FormControlLabel,Checkbox } from '@mui/material';
 import  secureLocalStorage  from  "react-secure-storage";
+import {useParams} from "react-router-dom"
 import {API} from '../api/api'
 const theme = createTheme();
 
- 
+
   export default function Login({ isUserAuthenticated }) {
+    
   const navigate=useNavigate()
+
 
   const [email,setEmail]=useState('')
   const [password,setPassword]=useState('')
@@ -23,8 +26,9 @@ const theme = createTheme();
       if (response.isSuccess) {
         
          
-          secureLocalStorage.setItem("Token", `Bearer ${response.data.token}`);
-          secureLocalStorage.setItem("userInfo", JSON.stringify(response.data.id));
+          secureLocalStorage.setItem("9z$C&F)J", `Bearer ${response.data.token}`);
+          secureLocalStorage.setItem("cRfUjXn2", JSON.stringify(response.data));
+          
         isUserAuthenticated(true)
        
         navigate('/');

@@ -11,11 +11,14 @@ import {
     IconButton,
   
   } from "@mui/material"
- 
+ import { useState,useEffect } from "react";
   import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import CommentIcon from '@mui/icons-material/Comment';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import {API} from "../api/api"
+
+
 export default function Post({ post }) {
 
 
@@ -23,6 +26,14 @@ export default function Post({ post }) {
   const addEllipsis = (str, limit) => {
     return str.length > limit ? str.substring(0, limit) + '...' : str;
 } 
+
+const likePost=async()=>{
+  const {data} =await API.likePost(post._id)
+  console.log({data})
+
+
+}
+
   
   return (
     <>
@@ -74,15 +85,11 @@ export default function Post({ post }) {
 
               </p>
               <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton aria-label="add to favorites" onClick={()=> likePost()}>
           <FavoriteIcon />
+           {post.likeCount}
         </IconButton>
-        <IconButton aria-label="add to favorites">
-          <CommentIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
+       
        
       </CardActions>
           </div>

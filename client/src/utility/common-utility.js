@@ -1,10 +1,10 @@
 import  secureLocalStorage  from  "react-secure-storage";
 export const getRefreshToken = () => {
-    return secureLocalStorage.getItem('Token');
+    return secureLocalStorage.getItem('9z$C&F)J');
 }
 
 export const setRefreshToken = (refreshToken) => {
-    secureLocalStorage.setItem('Token', `Bearer ${refreshToken}`);
+    secureLocalStorage.setItem('9z$C&F)J', `Bearer ${refreshToken}`);
 }
 
 export const getType = (value, body) => {

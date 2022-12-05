@@ -39,6 +39,10 @@ const UserSchema=new mongoose.Schema({
         required: true,
         default: false,
       },
+      bio:{
+        type: String,
+        require:[true,'tell something about yourself']
+      }
 
 })
 UserSchema.pre('save',async function(){

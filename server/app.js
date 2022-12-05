@@ -9,11 +9,13 @@ const errorHandlerMiddleware=require("./middlewares/error-handaler")
 const {MONGO_IP, MONGO_PORT,MONGO_USER,MONGO_PASSWORD}=require("./config/config")
 const postRoute=require("./Routes/post")
 const authRoute=require("./Routes/auth")
-
+const commentRoute=require("./Routes/comment")
+const replayRoute=require("./Routes/replay")
 require('events').EventEmitter.defaultMaxListeners = 15;
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.set('trust proxy',1)
+
 
 
 app.use(cors())
@@ -23,6 +25,8 @@ app.get('/api/v1/test',(req,res)=>{
 
 app.use('/api/v1/auth',authRoute)
 app.use('/api/v1/posts',postRoute)
+app.use('/api/v1/comments',commentRoute)
+app.use('/api/v1/replays',replayRoute)
 
 app.use(errorHandlerMiddleware)
 app.use(notFoundMiddleware)

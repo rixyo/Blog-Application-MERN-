@@ -1,17 +1,16 @@
 
 const {StatusCodes}=require('http-status-codes')
-const {BadRequestError, UnauthenticatedError}=require('../errors')
+const {BadRequestError, UnauthenticatedError,NotFoundError}=require('../errors')
 var uniqid = require('uniqid');
 
 const User = require("../Models/user")
-
-
+const Post=require("../Models/post")
 const register=async(req,res)=>{
     
    
     const user=await User.create({...req.body,tag:uniqid.time()})
     const token=user.createJwt()
-    
+  
     res.status(StatusCodes.CREATED).json({ username: user.username,image:user.image,tag:user.tag,github:user.github,token})
 }
 const login=async(req,res)=>{
@@ -32,35 +31,14 @@ const login=async(req,res)=>{
 
   }
   const token=user.createJwt()
-  res.status(StatusCodes.OK).json({ id: user._id,token})
+  res.status(StatusCodes.OK).json({ id: user._id,image:user.image,tag:user.tag,github:user.github,name:user.username,bio:user.bio,token})
 }
 
 const profile = async (req, res) => {
-
-  const user = await User.findById(req.user._id);
-
-  if (user) {
-    user.username = req.body.username || user.username;
-  
-    if (req.body.password) {
-      user.password = req.body.password;
-    }
-
-    const updatedUser = await user.save();
-
-    res.json({
-      _id: updatedUser._id,
-      name: updatedUser.username,
-      
-    
-      
-      
-    });
-  } else {
-    res.status(404);
-    throw new Error("User Not Found");
+ 
+    const posts = await Post.find({ createdBy: req.user.userId }).sort('createdAt')
+    res.status(StatusCodes.OK).json({ posts })
   }
-}
 
 
 

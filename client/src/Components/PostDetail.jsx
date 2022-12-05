@@ -1,9 +1,10 @@
 import { useState, useEffect, useContext } from 'react';
 
-import { Box, Typography,Paper,CardHeader,CardActions,Stack,Avatar, styled, Button,IconButton,Link } from '@mui/material';
+import { Box, Typography,Paper,CardHeader,CardActions,Stack,Avatar, styled, Button,IconButton,Link,Skeleton } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
 import {  useNavigate, useParams } from 'react-router-dom'
-
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import Comments from './Comments';
 
 
 
@@ -25,6 +26,11 @@ const Item = styled(Paper)(({ theme }) => ({
   }));
 
 const DetailView = () => {
+    const [loading, setLoading] = useState(true);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, [3000]);
  
     const Image = styled('img')({
         width: '50%',
@@ -37,6 +43,8 @@ const DetailView = () => {
     const [Usr, setUser] = useState({});
   
 
+   
+   
     const navigate = useNavigate();
     const { id } = useParams();
     const { user } = useContext(DataContext);
@@ -60,17 +68,30 @@ const DetailView = () => {
         )
         navigate('/')
     }
+    
+  
 
     return (
      
                <Box >
+                   <Box flex={4} p={{ xs: 0, md: 2 }}>
+        {loading ? (
+          <Stack spacing={1}>
+            <Skeleton variant="text" height={100} />
+            <Skeleton variant="text" height={20} />
+            <Skeleton variant="text" height={20} />
+            <Skeleton variant="rectangular" height={300} />
+          </Stack>
+        ) : (
+            <>
+     
     
     <CardHeader sx={{marginLeft:{xl:70,sm:15,md:40}}}
           avatar={<Avatar sx={{ bgcolor: "white" }} aria-label="recipe"
           src= {Usr.image} />
               
          }
-          
+         
           
         
           title={Usr.username}
@@ -81,7 +102,7 @@ const DetailView = () => {
           <Stack direction="row" spacing={2} justifyContent='flex-end' >
           
   <Item>
-  {Usr._id===user &&(
+  {Usr._id===user?.id&&(
   <Link href={`/update/${post._id}`}>
    
     <IconButton variant="outlined" color="success">
@@ -92,7 +113,7 @@ const DetailView = () => {
     </Item>
     
     <Item>
-    { Usr._id===user  &&  (
+    { Usr._id===user?.id  &&  (
         
     <Button variant="outlined" color="error" onClick={()=>deletePost()}>
        
@@ -104,6 +125,15 @@ const DetailView = () => {
  
   
 </Stack>
+
+<CardActions disableSpacing>
+        <IconButton aria-label="add to favorites" >
+          <FavoriteIcon />
+           {post.likeCount}
+        </IconButton>
+        
+        </CardActions>
+
           
               <div className="postInfo">
                   <div className="postCats">
@@ -128,14 +158,16 @@ const DetailView = () => {
               {post.description}
 
               </Typography>
+              <Comments post={post}/>
               
 
 
               
-              <CardActions disableSpacing>
-
-       
-      </CardActions>
+            
+        
+         </>
+         )}
+         </Box>
           
           </Box>
            
