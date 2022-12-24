@@ -18,8 +18,8 @@ services:
     volumes:
       - /app/node_modules
       - ./server:/app
-    ports:
-      - 5000:5000
+    #ports:
+     # - 5000:5000
     depends_on: 
       - mongoDB
     environment:
@@ -33,11 +33,22 @@ services:
     volumes:
       - /app/node_modules
       - ./client:/app
-    ports:
-      - 3000:3000
+   # ports:
+    #  - 3000:3000
     depends_on: 
       - server
-  
+  nginx: 
+    restart: always
+    depends_on:
+      - server
+      - client
+    build: 
+      context: ./nginx
+      dockerfile: Dockerfile.dev
+      
+    
+    ports: 
+      - 8080:80
 volumes:
   mongodb-data:
 

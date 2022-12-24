@@ -14,7 +14,7 @@ const replayRoute=require("./Routes/replay")
 require('events').EventEmitter.defaultMaxListeners = 15;
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-app.set('trust proxy',1)
+app.enable('trust proxy')
 
 
 
