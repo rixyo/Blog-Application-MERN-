@@ -40,7 +40,7 @@ const DetailView = () => {
     const url = 'https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80';
     
     const [post, setPost] = useState({});
-    const [Usr, setUser] = useState({});
+ 
   
 
    
@@ -53,13 +53,15 @@ const DetailView = () => {
             let response = await API.getPostById(id);
             if (response.isSuccess) {
                 setPost(response.data);
-                setUser(response.data.createdBy)
+              
                
                
             }
         }
         fetchData();
     }, []);
+
+
 
     const deletePost = async () => {  
        await API.deletePost(post._id
@@ -69,7 +71,7 @@ const DetailView = () => {
         navigate('/')
     }
     
-  
+
 
     return (
      
@@ -88,21 +90,24 @@ const DetailView = () => {
     
     <CardHeader sx={{marginLeft:{xl:70,sm:15,md:40}}}
           avatar={<Avatar sx={{ bgcolor: "white" }} aria-label="recipe"
-          src= {Usr.image} />
+          src= {post.createdBy.image} />
               
          }
          
           
         
-          title={Usr.username}
+          title={post.createdBy.username}
           subheader={post.createdAt} />
           <Box sx={{marginLeft:{xl:70,sm:15,md:40}}}>
           <Image src={post.image || url} alt="post"  />
           </Box>
           <Stack direction="row" spacing={2} justifyContent='flex-end' >
-          
+           
+           
+
+           
   <Item>
-  {Usr._id===user?.id&&(
+  {post.createdBy._id===user?.id&&(
   <Link href={`/update/${post._id}`}>
    
     <IconButton variant="outlined" color="success">
@@ -113,13 +118,19 @@ const DetailView = () => {
     </Item>
     
     <Item>
-    { Usr._id===user?.id  &&  (
+    { post.createdBy._id===user?.id  &&  (
         
     <Button variant="outlined" color="error" onClick={()=>deletePost()}>
        
         <Delete/>
     </Button>
     )}
+    
+
+
+   
+ 
+          
         
     </Item>
  

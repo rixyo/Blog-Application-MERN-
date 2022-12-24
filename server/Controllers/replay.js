@@ -4,7 +4,7 @@ const { StatusCodes }=require("http-status-codes")
 
 
 const getAllReplay = async (req, res) => {
-    const replay = await Replay.find({commentId: req.params.id}).sort('date').populate({path:'replayBy',select:['username','image']})
+    const replay = await Replay.find({commentId: req.params.id}).sort('createdAt').populate({path:'replayBy',select:['username','image']})
     res.status(StatusCodes.OK).json( replay )
   }
 const createReplay = async (req, res) => {

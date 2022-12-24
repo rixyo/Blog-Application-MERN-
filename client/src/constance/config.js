@@ -42,5 +42,5 @@ export const SERVICE_URLS = {
     newReplay: { url: '/replays', method: 'POST' },
     getAllReplays: { url: '/replays', method: 'GET', query: true },
     deleteReplay: { url: '/replays', method: 'DELETE', query: true },
-    
+    getAllUsers:{url: '/auth/info',method: 'GET',query: true}
 }

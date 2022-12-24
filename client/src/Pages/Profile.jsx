@@ -67,7 +67,7 @@ const Profile = () => {
      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}  direction="row">
         {
                 posts.posts?.length>0 ? posts.posts.map(post => (
-                    < Grid>
+                    < Grid key={post._id}>
                      
                             <Post  post={post} />
                         

@@ -49,7 +49,7 @@ const likePost=async()=>{
           }
         
           title={post.createdBy.username}
-          subheader={post.createdAt} />
+          subheader={new Date(post.createdAt).toDateString()} />
           <CardMedia className="postImg"
         component="img"
 

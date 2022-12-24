@@ -48,7 +48,7 @@ const Comment = ({ comment, setToggle }) => {
             <Container>
             <CardHeader
           avatar={<Avatar sx={{ bgcolor: "white" }} aria-label="recipe"
-          src= {comment.commentBy.image} />
+          src= {comment.commentBy.image}  />
               
          } 
           title={comment.commentBy.username}

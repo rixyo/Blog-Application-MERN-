@@ -19,7 +19,7 @@ const Posts = () => {
      <div className='posts'>
             {
                 posts?.length ? posts.map(post => (
-                    <Grid item lg={3} sm={4} xs={12}>
+                    <Grid item lg={3} sm={4} xs={12} key={post._id}>
                         
                             <Post  post={post} />
                         

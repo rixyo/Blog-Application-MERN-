@@ -4,7 +4,7 @@ const { StatusCodes }=require("http-status-codes")
 
 
 const getAllComments = async (req, res) => {
-    const comment = await Comment.find({postId: req.params.id}).sort('date').populate({path:'commentBy',select:['username','image']})
+    const comment = await Comment.find({postId: req.params.id}).sort('createdAt').populate({path:'commentBy',select:['username','image']}).sort('createdAt')
     res.status(StatusCodes.OK).json({ comment, count: comment.length })
   }
 const createComment = async (req, res) => {

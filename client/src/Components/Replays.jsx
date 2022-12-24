@@ -81,18 +81,22 @@ const addReplay=async(e)=>{
              value={replay.replays}
              />
             <Button
+            sx={{marginTop:2,marginBottom:1,marginLeft:5}}
+            variant="outlined"
              onClick={(e)=>addReplay(e)}
             >replay</Button>
         </Popover>
         <Box>
     {
         replays && replays.length>0 && replays.map(replay=>(
-            <Replay replay={replay} />
+            <Replay key={replay._id} replay={replay} />
 
         ))
   
 }
     </Box>
+   
+   
      
       </div>
       

@@ -37,7 +37,7 @@ const Replay = ({ replay}) => {
 
     const { user } = useContext(DataContext)
     
-    const removeComment = async () => {
+    const removeReplay = async () => {
        await API.deleteReplay(replay._id);
       
        
@@ -48,7 +48,7 @@ const Replay = ({ replay}) => {
             <Container>
             <CardHeader
           avatar={<Avatar sx={{ bgcolor: "white" }} aria-label="recipe"
-          src= {replay.replayBy.image} />
+          src= {replay.replayBy.image} alt='image' />
               
          } 
           title={replay.replayBy.username}
@@ -56,7 +56,7 @@ const Replay = ({ replay}) => {
           
                 { replay.replayBy._id === user.id &&
                 <IconButton>
-                     <DeleteIcon onClick={() => removeComment()} /> 
+                     <DeleteIcon onClick={() => removeReplay()} /> 
 
                 </IconButton>
 }

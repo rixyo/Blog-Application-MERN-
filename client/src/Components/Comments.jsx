@@ -84,7 +84,7 @@ const Comments = ({post}) => {
    <Box>
     {
         comments.comment && comments.comment.length>0 && comments.comment.map(comment=>(
-            <Comment comment={comment} />
+            <Comment key={comment._id} comment={comment} />
 
         ))
   

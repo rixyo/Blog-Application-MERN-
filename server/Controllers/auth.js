@@ -39,7 +39,11 @@ const profile = async (req, res) => {
     const posts = await Post.find({ createdBy: req.user.userId }).sort('createdAt')
     res.status(StatusCodes.OK).json({ posts })
   }
+const UserInfo=async(req,res)=>{
+  const users= await User.find({})
+  res.status(StatusCodes.OK).json(users)
+
+}
 
 
-
-module.exports={register,login,profile}
+module.exports={register,login,profile,UserInfo}

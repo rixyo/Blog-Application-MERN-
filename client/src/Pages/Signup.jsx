@@ -1,5 +1,5 @@
 import  React,{useState} from 'react';
-
+import Alert from '@mui/joy/Alert';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -64,9 +64,9 @@ export default function SignUp () {
          image:url,
          password,
         }
-        console.log(bio)
+     
          await API.userSignup(newUser)
-      
+   
         
         navigate('/login')
        
